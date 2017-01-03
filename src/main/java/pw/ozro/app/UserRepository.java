@@ -6,9 +6,10 @@ import java.sql.SQLException;
 
 
 import pw.ozro.app.Repository;
+import pw.ozro.app.User;
 
 
-public class UserRepository extends Repository {
+public class UserRepository extends Repository<User> {
     UserRepository(Connection c) throws SQLException {
         super(c);
     }

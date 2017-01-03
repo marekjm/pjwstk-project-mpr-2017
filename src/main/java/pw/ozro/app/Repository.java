@@ -8,7 +8,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 
-public abstract class Repository {
+import pw.ozro.app.Entity;
+
+
+public abstract class Repository<AbstractEntity extends Entity> {
     private Connection _connection;
 
     Repository(Connection c) throws SQLException {
