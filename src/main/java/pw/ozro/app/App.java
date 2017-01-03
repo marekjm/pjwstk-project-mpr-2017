@@ -6,6 +6,8 @@ import java.sql.SQLException;
 
 import pw.ozro.app.Entity;
 import pw.ozro.app.User;
+import pw.ozro.app.Role;
+import pw.ozro.app.Permission;
 import pw.ozro.app.UserRoles;
 import pw.ozro.app.RolesPermissions;
 

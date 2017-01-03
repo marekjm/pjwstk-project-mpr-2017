@@ -10,6 +10,13 @@ public abstract class Entity {
         Unknown
     }
 
-    protected Integer id;
-    protected EntityState state;
+    private int _id;
+    private EntityState _state;
+
+    public int id() { return _id; }
+
+    public EntityState state() { return _state; }
+    public EntityState state(EntityState _) { return _state = _; }
+
+    abstract public String table();
 }
