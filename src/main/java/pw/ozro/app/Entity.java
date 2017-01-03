@@ -17,6 +17,4 @@ public abstract class Entity {
 
     public EntityState state() { return _state; }
     public EntityState state(EntityState _) { return _state = _; }
-
-    abstract public String table();
 }

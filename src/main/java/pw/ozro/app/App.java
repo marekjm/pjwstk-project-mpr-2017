@@ -6,17 +6,20 @@ import java.sql.SQLException;
 
 import pw.ozro.app.Entity;
 import pw.ozro.app.User;
+import pw.ozro.app.UserRepository;
+/*
 import pw.ozro.app.Role;
 import pw.ozro.app.Permission;
 import pw.ozro.app.UserRoles;
 import pw.ozro.app.RolesPermissions;
+*/
 
 /**
  * Hello world!
  *
  */
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         System.out.println( "Hello World!" );
 
         try {
@@ -35,6 +38,6 @@ public class App {
             return;
         }
 
-        Entity.EntityState state = Entity.EntityState.New;
+        UserRepository ur = new UserRepository(c);
     }
 }
