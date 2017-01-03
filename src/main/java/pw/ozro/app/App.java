@@ -4,6 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import pw.ozro.app.Entity;
+import pw.ozro.app.User;
+import pw.ozro.app.UserRoles;
+import pw.ozro.app.RolesPermissions;
+
 /**
  * Hello world!
  *
@@ -27,5 +32,7 @@ public class App {
             e.printStackTrace();
             return;
         }
+
+        Entity.EntityState state = Entity.EntityState.New;
     }
 }
