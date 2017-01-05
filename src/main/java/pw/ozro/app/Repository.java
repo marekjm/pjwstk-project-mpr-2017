@@ -74,4 +74,19 @@ public abstract class Repository<AbstractEntity extends Entity> {
         PreparedStatement ps = connection().prepareStatement(q);
         ps.executeUpdate();
     }
+
+    protected abstract String selectColumns();
+    protected abstract AbstractEntity extractSelected(ResultSet rs) throws SQLException;
+    public AbstractEntity withId(int id) throws Exception, SQLException {
+        String q = ("select " + selectColumns() + " from " + table() + " where id = ?;");
+        PreparedStatement ps = connection().prepareStatement(q);
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+        if (!rs.next()) {
+            throw new Exception("no " + table() + " with id " + (new Integer(id)).toString());
+        }
+        AbstractEntity entity = extractSelected(rs);
+        entity.id(id);
+        return entity;
+    }
 }

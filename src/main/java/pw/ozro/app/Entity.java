@@ -14,6 +14,7 @@ public abstract class Entity {
     private EntityState _state;
 
     public int id() { return _id; }
+    public void id(int _) { _id = _; }
 
     public EntityState state() { return _state; }
     public EntityState state(EntityState _) { return _state = _; }

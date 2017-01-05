@@ -39,4 +39,15 @@ public class UserRepository extends Repository<User> {
         ps.setString(1, user.login);
         ps.setString(2, user.password);
     }
+
+    @Override
+    protected String selectColumns() {
+        return "login, password";
+    }
+
+    @Override
+    protected User extractSelected(ResultSet rs) throws SQLException {
+        User user = new User(rs.getString("login"), rs.getString("password"));
+        return user;
+    }
 }

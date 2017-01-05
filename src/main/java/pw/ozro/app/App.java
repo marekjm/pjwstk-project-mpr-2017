@@ -20,7 +20,7 @@ import pw.ozro.app.RolesPermissions;
  *
  */
 public class App {
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws Exception, SQLException {
         System.out.println( "Hello World!" );
 
         try {
@@ -43,6 +43,9 @@ public class App {
         User user = new User("zz", "top");
         System.out.println(user);
         System.out.println(ur.count());
+
+        User user_by_id = ur.withId(14);
+        System.out.println(user_by_id);
 
         UnitOfWork uow = new UnitOfWork(c);
         uow.scheduleCreate(user, ur);
