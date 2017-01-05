@@ -27,6 +27,10 @@ public class UnitOfWork {
         _entities.put(entity, repository);
     }
 
+    public void clear() {
+        _entities.clear();
+    }
+
     /*
        private Map<Entity, Repository> entities;
 
