@@ -52,9 +52,12 @@ public class App {
         }
         System.out.println(user_by_id);
 
+        User user_to_delete = ur.withId(15);
+
         UnitOfWork uow = new UnitOfWork(c);
         uow.scheduleCreate(user, ur);
         uow.scheduleUpdate(user_by_id, ur);
+        uow.scheduleDelete(user_to_delete, ur);
 
         uow.store();
         uow.commit();

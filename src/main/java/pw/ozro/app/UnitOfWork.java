@@ -32,6 +32,11 @@ public class UnitOfWork {
         _entities.put(entity, repository);
     }
 
+    public void scheduleDelete(Entity entity, Repository repository) {
+        entity.state(Entity.EntityState.Deleted);
+        _entities.put(entity, repository);
+    }
+
     public void clear() {
         _entities.clear();
     }
@@ -44,6 +49,9 @@ public class UnitOfWork {
                     break;
                 case Modified:
                     _entities.get(entity).update(entity);
+                    break;
+                case Deleted:
+                    _entities.get(entity).delete(entity);
                     break;
                 default:
                     System.out.println("Ouch! Not implemented!");

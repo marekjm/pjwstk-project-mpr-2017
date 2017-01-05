@@ -73,6 +73,13 @@ public abstract class Repository<AbstractEntity extends Entity> {
         ps.executeUpdate();
     }
 
+    public void delete(AbstractEntity entity) throws SQLException {
+        String q = ("delete from " + table() + " where id = ?");
+        PreparedStatement ps = connection().prepareStatement(q);
+        ps.setInt(1, entity.id());
+        ps.executeUpdate();
+    }
+
     public int count() throws SQLException {
         String q = ("select count(*) as total from " + table() + ";");
         PreparedStatement ps = connection().prepareStatement(q);
