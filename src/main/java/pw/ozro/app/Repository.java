@@ -68,4 +68,10 @@ public abstract class Repository<AbstractEntity extends Entity> {
         rs.next();
         return rs.getInt("total");
     }
+
+    public void clear() throws SQLException {
+        String q = ("delete from " + table() + ";");
+        PreparedStatement ps = connection().prepareStatement(q);
+        ps.executeUpdate();
+    }
 }
