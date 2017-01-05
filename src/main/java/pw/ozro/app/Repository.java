@@ -19,6 +19,8 @@ public abstract class Repository<AbstractEntity extends Entity> {
         ensureTableExists();
     }
 
+    protected Connection connection() { return _connection; }
+
     protected abstract String table();
     protected abstract String queryCreateTable();
 

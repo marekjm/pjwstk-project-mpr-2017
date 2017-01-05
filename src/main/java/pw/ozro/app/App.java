@@ -39,5 +39,8 @@ public class App {
         }
 
         UserRepository ur = new UserRepository(c);
+        User user = new User("zz", "top");
+        System.out.println(user);
+        System.out.println(ur.count());
     }
 }
