@@ -46,5 +46,8 @@ public class App {
 
         UnitOfWork uow = new UnitOfWork(c);
         uow.scheduleCreate(user, ur);
+
+        uow.store();
+        uow.commit();
     }
 }

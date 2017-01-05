@@ -53,4 +53,11 @@ public abstract class Repository<AbstractEntity extends Entity> {
             System.out.println("table " + table() + " exists");
         }
     }
+
+    protected abstract void bindCreate(PreparedStatement ps, AbstractEntity entity) throws SQLException;
+    public void create(AbstractEntity entity) throws SQLException {
+        PreparedStatement ps = connection().prepareStatement(fullQueryCreate());
+        bindCreate(ps, entity);
+        ps.executeUpdate();
+    }
 }

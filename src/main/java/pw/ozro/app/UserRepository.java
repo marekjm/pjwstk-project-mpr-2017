@@ -34,6 +34,12 @@ public class UserRepository extends Repository<User> {
         return "(login, password) values (?, ?)";
     }
 
+    @Override
+    protected void bindCreate(PreparedStatement ps, User user) throws SQLException {
+        ps.setString(1, user.login);
+        ps.setString(2, user.password);
+    }
+
     public int count() throws SQLException {
         String q = "select count(*) as total from t_sys_users;";
         PreparedStatement ps = connection().prepareStatement(q);

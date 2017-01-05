@@ -31,6 +31,23 @@ public class UnitOfWork {
         _entities.clear();
     }
 
+    public void store() throws SQLException {
+        for (Entity entity : _entities.keySet()) {
+            switch (entity.state()) {
+                case New:
+                    _entities.get(entity).create(entity);
+                    break;
+                default:
+                    System.out.println("Ouch! Not implemented!");
+            }
+        }
+    }
+
+    public void commit() throws SQLException {
+        _connection.commit();
+        _entities.clear();
+    }
+
     /*
        private Map<Entity, Repository> entities;
 
