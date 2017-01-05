@@ -24,8 +24,12 @@ public abstract class Repository<AbstractEntity extends Entity> {
     protected abstract String table();
     protected abstract String queryCreateTable();
 
-    /*
     protected abstract String queryCreate();
+    private String fullQueryCreate() {
+        return ("insert into " + table() + " " + queryCreate());
+    }
+
+    /*
     protected abstract String queryRead();
     protected abstract String queryUpdate();
     protected abstract String queryDelete();

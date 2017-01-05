@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import pw.ozro.app.Entity;
 import pw.ozro.app.User;
 import pw.ozro.app.UserRepository;
+import pw.ozro.app.UnitOfWork;
 /*
 import pw.ozro.app.Role;
 import pw.ozro.app.Permission;
@@ -42,5 +43,8 @@ public class App {
         User user = new User("zz", "top");
         System.out.println(user);
         System.out.println(ur.count());
+
+        UnitOfWork uow = new UnitOfWork(c);
+        uow.scheduleCreate(user, ur);
     }
 }
