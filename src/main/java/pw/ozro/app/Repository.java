@@ -29,6 +29,11 @@ public abstract class Repository<AbstractEntity extends Entity> {
         return ("insert into " + table() + " " + queryCreate());
     }
 
+    protected abstract String queryUpdate();
+    private String fullQueryUpdate() {
+        return ("update " + table() + " set " + queryUpdate() + " where id = ?");
+    }
+
     /*
     protected abstract String queryRead();
     protected abstract String queryUpdate();
@@ -58,6 +63,13 @@ public abstract class Repository<AbstractEntity extends Entity> {
     public void create(AbstractEntity entity) throws SQLException {
         PreparedStatement ps = connection().prepareStatement(fullQueryCreate());
         bindCreate(ps, entity);
+        ps.executeUpdate();
+    }
+
+    protected abstract void bindUpdate(PreparedStatement ps, AbstractEntity entity) throws SQLException;
+    public void update(AbstractEntity entity) throws SQLException {
+        PreparedStatement ps = connection().prepareStatement(fullQueryUpdate());
+        bindUpdate(ps, entity);
         ps.executeUpdate();
     }
 

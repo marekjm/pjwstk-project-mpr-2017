@@ -27,6 +27,11 @@ public class UnitOfWork {
         _entities.put(entity, repository);
     }
 
+    public void scheduleUpdate(Entity entity, Repository repository) {
+        entity.state(Entity.EntityState.Modified);
+        _entities.put(entity, repository);
+    }
+
     public void clear() {
         _entities.clear();
     }
@@ -36,6 +41,9 @@ public class UnitOfWork {
             switch (entity.state()) {
                 case New:
                     _entities.get(entity).create(entity);
+                    break;
+                case Modified:
+                    _entities.get(entity).update(entity);
                     break;
                 default:
                     System.out.println("Ouch! Not implemented!");

@@ -35,9 +35,20 @@ public class UserRepository extends Repository<User> {
     }
 
     @Override
+    protected String queryUpdate() {
+        return "(login, password) = (?, ?)";
+    }
+
+    @Override
     protected void bindCreate(PreparedStatement ps, User user) throws SQLException {
         ps.setString(1, user.login);
         ps.setString(2, user.password);
+    }
+
+    @Override
+    protected void bindUpdate(PreparedStatement ps, User user) throws SQLException {
+        bindCreate(ps, user);
+        ps.setInt(3, user.id());
     }
 
     @Override

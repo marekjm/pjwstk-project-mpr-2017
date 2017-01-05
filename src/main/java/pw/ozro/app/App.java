@@ -45,10 +45,16 @@ public class App {
         System.out.println(ur.count());
 
         User user_by_id = ur.withId(14);
+        if (user_by_id.password.equals("top")) {
+            user_by_id.password = "t0p";
+        } else {
+            user_by_id.password = "top";
+        }
         System.out.println(user_by_id);
 
         UnitOfWork uow = new UnitOfWork(c);
         uow.scheduleCreate(user, ur);
+        uow.scheduleUpdate(user_by_id, ur);
 
         uow.store();
         uow.commit();
