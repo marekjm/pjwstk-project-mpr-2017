@@ -60,4 +60,12 @@ public abstract class Repository<AbstractEntity extends Entity> {
         bindCreate(ps, entity);
         ps.executeUpdate();
     }
+
+    public int count() throws SQLException {
+        String q = ("select count(*) as total from " + table() + ";");
+        PreparedStatement ps = connection().prepareStatement(q);
+        ResultSet rs = ps.executeQuery();
+        rs.next();
+        return rs.getInt("total");
+    }
 }

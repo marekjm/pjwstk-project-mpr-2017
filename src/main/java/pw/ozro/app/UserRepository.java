@@ -39,12 +39,4 @@ public class UserRepository extends Repository<User> {
         ps.setString(1, user.login);
         ps.setString(2, user.password);
     }
-
-    public int count() throws SQLException {
-        String q = "select count(*) as total from t_sys_users;";
-        PreparedStatement ps = connection().prepareStatement(q);
-        ResultSet rs = ps.executeQuery();
-        rs.next();
-        return rs.getInt("total");
-    }
 }
