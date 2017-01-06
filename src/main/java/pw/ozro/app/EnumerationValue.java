@@ -18,6 +18,6 @@ public class EnumerationValue extends Entity {
     }
 
     public String toString() {
-        return (human_readable_key + "=" + value);
+        return ("[" + id() + "]" + human_readable_key + "=" + value);
     }
 }
