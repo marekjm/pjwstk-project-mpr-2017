@@ -37,6 +37,8 @@ public class App {
         }
 
         UserRepository ur = new UserRepository(c);
+        ur.clear();
+        System.out.println(ur.count());
         /*
         User user = new User("zz", "top");
         System.out.println(user);
@@ -53,21 +55,32 @@ public class App {
         User user_to_delete = ur.withId(15);
         */
 
-        UnitOfWork uow = new UnitOfWork(c);
-        /*
-        uow.scheduleCreate(user, ur);
-        uow.scheduleUpdate(user_by_id, ur);
-        uow.scheduleDelete(user_to_delete, ur);
-        */
-
         RoleRepository rr = new RoleRepository(c);
+        rr.clear();
+        System.out.println(rr.count());
+        /*
         Role role = new Role("test_role");
         System.out.println(role);
         System.out.println(rr.count());
 
         uow.scheduleCreate(role, rr);
+        */
 
-        uow.store();
-        uow.commit();
+        PermissionRepository pr = new PermissionRepository(c);
+        pr.clear();
+        System.out.println(pr.count());
+        // Permission permission = new Permission("test_permission");
+
+        EnumerationValueRepository evr = new EnumerationValueRepository(c);
+        EnumerationValue a_role = new EnumerationValue(1, "a_role", "A role.", "role");
+        EnumerationValue a_perm = new EnumerationValue(1, "a_perm", "A permission.", "permission");
+
+
+        // UnitOfWork uow = new UnitOfWork(c);
+        // uow.scheduleCreate(user, ur);
+        // uow.scheduleUpdate(user_by_id, ur);
+        // uow.scheduleDelete(user_to_delete, ur);
+        // uow.store();
+        // uow.commit();
     }
 }
