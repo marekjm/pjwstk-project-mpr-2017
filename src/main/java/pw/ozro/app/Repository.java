@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 
 import pw.ozro.app.Entity;
@@ -108,4 +110,31 @@ public abstract class Repository<AbstractEntity extends Entity> {
         entity.id(id);
         return entity;
     }
+
+    public List<AbstractEntity> all() throws Exception, SQLException {
+        String q = ("select id from " + table());
+        PreparedStatement ps = connection().prepareStatement(q);
+        ResultSet rs = ps.executeQuery();
+
+        List<AbstractEntity> result = new ArrayList<AbstractEntity>();
+        while (rs.next()) {
+            result.add(withId(rs.getInt("id")));
+        }
+        return result;
+    }
+
+	// public List<TEntity> getAll(){
+	// 	List<TEntity> result = null;
+	// 	try{
+			
+	// 		ResultSet rs = selectAll.executeQuery();
+	// 		result = new ArrayList<TEntity>();
+	// 		while(rs.next()){
+	// 			result.add(mapper.map(rs));
+	// 		}
+	// 	}catch(SQLException ex){
+	// 		ex.printStackTrace();
+	// 	}
+	// 	return result;
+	// }
 }

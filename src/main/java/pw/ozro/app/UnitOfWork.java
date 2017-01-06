@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.ArrayList;
-import java.util.List;
 
 import pw.ozro.app.Entity;
 import pw.ozro.app.Repository;
