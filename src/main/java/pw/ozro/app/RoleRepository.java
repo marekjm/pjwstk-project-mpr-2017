@@ -41,7 +41,7 @@ public class RoleRepository extends Repository<Role> {
 
     @Override
     protected void bindCreate(PreparedStatement ps, Role entity) throws SQLException {
-        ps.setInt(2, entity.role_id);
+        ps.setInt(1, entity.role_id);
         ps.setInt(2, entity.user_id);
     }
 
