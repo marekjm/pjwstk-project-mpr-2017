@@ -12,6 +12,10 @@ public class Permission extends Entity {
         role_id = rid;
         permission_id = pid;
     }
+    Permission(EnumerationValue rid, EnumerationValue pid) {
+        role_id = rid.id();
+        permission_id = pid.id();
+    }
 
     public String toString() {
         return (role_id + "." + permission_id);
