@@ -122,19 +122,4 @@ public abstract class Repository<AbstractEntity extends Entity> {
         }
         return result;
     }
-
-	// public List<TEntity> getAll(){
-	// 	List<TEntity> result = null;
-	// 	try{
-			
-	// 		ResultSet rs = selectAll.executeQuery();
-	// 		result = new ArrayList<TEntity>();
-	// 		while(rs.next()){
-	// 			result.add(mapper.map(rs));
-	// 		}
-	// 	}catch(SQLException ex){
-	// 		ex.printStackTrace();
-	// 	}
-	// 	return result;
-	// }
 }
