@@ -6,16 +6,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 
-import pw.ozro.app.Entity;
-import pw.ozro.app.User;
-import pw.ozro.app.UserRepository;
-import pw.ozro.app.UnitOfWork;
-
-
-/**
- * Hello world!
- *
- */
 public class ListUsers {
     public static void main(String[] args) throws Exception, SQLException {
         System.out.println( "Hello World!" );
@@ -36,11 +26,11 @@ public class ListUsers {
             return;
         }
 
-        UserRepository ur = new UserRepository(c);
-        System.out.println(ur.count());
+        UserRepository repo = new UserRepository(c);
+        System.out.println(repo.count());
 
-        for (User user : ur.all()) {
-            System.out.println(user);
+        for (User each : repo.all()) {
+            System.out.println(each);
         }
     }
 }
