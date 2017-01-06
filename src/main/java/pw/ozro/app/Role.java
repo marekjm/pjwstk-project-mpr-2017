@@ -5,13 +5,15 @@ import pw.ozro.app.Entity;
 
 
 public class Role extends Entity {
-    public String name;
+    public int role_id;
+    public int user_id;
 
-    Role(String n) {
-        name = n;
+    Role(int rid, int uid) {
+        role_id = rid;
+        user_id = uid;
     }
 
     public String toString() {
-        return name;
+        return (role_id + ":" + user_id);
     }
 }
