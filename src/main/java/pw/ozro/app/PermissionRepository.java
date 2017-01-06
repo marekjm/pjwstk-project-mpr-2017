@@ -41,7 +41,7 @@ public class PermissionRepository extends Repository<Permission> {
 
     @Override
     protected void bindCreate(PreparedStatement ps, Permission entity) throws SQLException {
-        ps.setInt(2, entity.role_id);
+        ps.setInt(1, entity.role_id);
         ps.setInt(2, entity.permission_id);
     }
 
