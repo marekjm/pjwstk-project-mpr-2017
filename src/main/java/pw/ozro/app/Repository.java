@@ -34,11 +34,11 @@ public abstract class Repository<AbstractEntity extends Entity> {
         return ("update " + table() + " set " + queryUpdate() + " where id = ?");
     }
 
-    /*
-    protected abstract String queryRead();
-    protected abstract String queryUpdate();
-    protected abstract String queryDelete();
-    */
+    public void drop() throws SQLException {
+        Statement create_table = _connection.createStatement();
+        String q = ("drop table if exists " + table());
+        create_table.executeUpdate(q);
+    }
 
     private void ensureTableExists() throws SQLException {
 		boolean tableExists = false;
