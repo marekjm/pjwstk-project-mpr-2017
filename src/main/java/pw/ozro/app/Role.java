@@ -28,7 +28,10 @@ public class Role extends Entity {
     public String report(Connection connection) throws Exception, SQLException {
         return (
             "role " + id() + ": "
-            + role_id + " to " + user_id
+            + role_id
+            + " (" + (new EnumerationValueRepository(connection)).withId(role_id) + ")"
+            + " to "
+            + user_id
             + " (" + (new UserRepository(connection)).withId(user_id).login + ")"
         );
     }

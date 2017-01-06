@@ -14,6 +14,6 @@ public class User extends Entity {
     }
 
     public String toString() {
-        return (login + ":" + password);
+        return ("[" + id() + "]" + login + ":" + password);
     }
 }
