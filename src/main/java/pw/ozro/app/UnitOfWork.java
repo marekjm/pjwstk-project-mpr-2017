@@ -20,26 +20,29 @@ public class UnitOfWork {
         _entities = new LinkedHashMap<Entity, Repository>();
     }
 
-    public void scheduleCreate(Entity entity, Repository repository) {
+    public UnitOfWork scheduleCreate(Entity entity, Repository repository) {
         entity.state(Entity.EntityState.New);
         _entities.put(entity, repository);
+        return this;
     }
 
-    public void scheduleUpdate(Entity entity, Repository repository) {
+    public UnitOfWork scheduleUpdate(Entity entity, Repository repository) {
         entity.state(Entity.EntityState.Modified);
         _entities.put(entity, repository);
+        return this;
     }
 
-    public void scheduleDelete(Entity entity, Repository repository) {
+    public UnitOfWork scheduleDelete(Entity entity, Repository repository) {
         entity.state(Entity.EntityState.Deleted);
         _entities.put(entity, repository);
+        return this;
     }
 
     public void clear() {
         _entities.clear();
     }
 
-    public void store() throws SQLException {
+    public UnitOfWork store() throws SQLException {
         for (Entity entity : _entities.keySet()) {
             switch (entity.state()) {
                 case New:
@@ -55,11 +58,17 @@ public class UnitOfWork {
                     System.out.println("Ouch! Not implemented!");
             }
         }
+        return this;
     }
 
-    public void commit() throws SQLException {
+    public UnitOfWork commit() throws SQLException {
         _connection.commit();
         _entities.clear();
+        return this;
+    }
+
+    public void rollback() throws SQLException {
+        _connection.rollback();
     }
 
     /*
