@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 
+if [[ "$@" == '' ]]; then
+    echo "SYNOPSIS"
+    echo "  $0 <class>"
+    echo ""
+    echo "DESCRIPTION"
+    echo "  Shortcut for running Java programs."
+    echo "  It sets up CLASSPATH for you before running classes from 'pw.ozro.app' namespace."
+    exit 0
+fi
+
 TOOL=$1
 if [[ $TOOL == '' ]]; then
     TOOL=App
