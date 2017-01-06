@@ -30,7 +30,7 @@ public class ListRoles {
         System.out.println(repo.count());
 
         for (Role each : repo.all()) {
-            System.out.println(each);
+            System.out.println(each.report(c));
         }
     }
 }

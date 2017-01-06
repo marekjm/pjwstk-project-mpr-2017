@@ -1,6 +1,10 @@
 package pw.ozro.app;
 
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
+
 import pw.ozro.app.Entity;
 
 
@@ -19,5 +23,16 @@ public class Permission extends Entity {
 
     public String toString() {
         return (role_id + "." + permission_id);
+    }
+
+    public String report(Connection connection) throws Exception, SQLException {
+        return (
+            "permission " + id() + ": "
+            + permission_id
+            + " (" + (new EnumerationValueRepository(connection)).withId(permission_id) + ")"
+            + " to "
+            + role_id
+            + " (" + (new EnumerationValueRepository(connection)).withId(role_id) + ")"
+        );
     }
 }

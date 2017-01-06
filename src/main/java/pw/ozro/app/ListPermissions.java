@@ -30,7 +30,7 @@ public class ListPermissions {
         System.out.println(repo.count());
 
         for (Permission each : repo.all()) {
-            System.out.println(each);
+            System.out.println(each.report(c));
         }
     }
 }
