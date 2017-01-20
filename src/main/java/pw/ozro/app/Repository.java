@@ -63,9 +63,13 @@ public abstract class Repository<AbstractEntity extends Entity> {
 
     protected abstract void bindCreate(PreparedStatement ps, AbstractEntity entity) throws SQLException;
     public void create(AbstractEntity entity) throws SQLException {
-        PreparedStatement ps = connection().prepareStatement(fullQueryCreate());
+        PreparedStatement ps = connection().prepareStatement(fullQueryCreate(), Statement.RETURN_GENERATED_KEYS);
         bindCreate(ps, entity);
         ps.executeUpdate();
+        ResultSet rs = ps.getGeneratedKeys();
+        if (rs.next()) {
+            entity.id(rs.getInt(1));
+        }
     }
 
     protected abstract void bindUpdate(PreparedStatement ps, AbstractEntity entity) throws SQLException;
