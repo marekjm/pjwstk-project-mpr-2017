@@ -28,8 +28,15 @@ public class AppTest
     /**
      * @return the suite of tests being tested
      */
-    public static Test suite()
+    public static Test suite() throws SQLException
     {
+        Connection c = fetchConnection();
+
+        // ensure required tables exist
+        new EnumerationValueRepository(c);
+        new PermissionRepository(c);
+        new UserRepository(c);
+
         return new TestSuite( AppTest.class );
     }
 
