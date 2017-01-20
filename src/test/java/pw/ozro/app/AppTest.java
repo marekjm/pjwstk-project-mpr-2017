@@ -51,9 +51,20 @@ public class AppTest
 
     public void testCreateEnumerationValue() throws SQLException {
         Connection c = fetchConnection();
-        EnumerationValue ev = new EnumerationValue( 42, "forty-two", "The Ultimate Answer.", "answer" );
+        EnumerationValue entity = new EnumerationValue( 42, "forty-two", "The Ultimate Answer.", "answer" );
         EnumerationValueRepository repo = new EnumerationValueRepository(c);
-        (new UnitOfWork(c)).scheduleCreate(ev, repo).store().commit();
+
+        (new UnitOfWork(c)).scheduleCreate(entity, repo).store().commit();
+        assertTrue( repo.count() > 0 );
+    }
+
+    public void testCreateUser() throws SQLException {
+        Connection c = fetchConnection();
+
+        User entity = new User( "JohnDoe", "p4$Sw0rD" );
+        UserRepository repo = new UserRepository(c);
+
+        (new UnitOfWork(c)).scheduleCreate(entity, repo).store().commit();
         assertTrue( repo.count() > 0 );
     }
 }
