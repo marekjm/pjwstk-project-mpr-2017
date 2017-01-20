@@ -48,4 +48,12 @@ public class AppTest
     public void testConnection() throws SQLException {
         fetchConnection();
     }
+
+    public void testCreateEnumerationValue() throws SQLException {
+        Connection c = fetchConnection();
+        EnumerationValue ev = new EnumerationValue( 42, "forty-two", "The Ultimate Answer.", "answer" );
+        EnumerationValueRepository repo = new EnumerationValueRepository(c);
+        (new UnitOfWork(c)).scheduleCreate(ev, repo).store().commit();
+        assertTrue( repo.count() > 0 );
+    }
 }
