@@ -65,6 +65,21 @@ public class AppTest
         assertTrue( repo.count() > 0 );
     }
 
+    public void testUpdateEnumerationValue() throws Exception, SQLException {
+        Connection c = fetchConnection();
+        EnumerationValue entity = new EnumerationValue( 42, "forty-two", "The Ultimate Answer.", "answer" );
+        EnumerationValueRepository repo = new EnumerationValueRepository(c);
+
+        UnitOfWork unit = (new UnitOfWork(c));
+        unit.scheduleCreate(entity, repo).store().commit();
+
+        entity.system_key = 666;
+        unit.scheduleUpdate(entity, repo).store().commit();
+
+        EnumerationValue modified = repo.withId( entity.id() );
+        assertEquals( 666, modified.system_key );
+    }
+
     public void testCreateUser() throws SQLException {
         Connection c = fetchConnection();
 
