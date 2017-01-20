@@ -83,4 +83,37 @@ public class AppTest
 
         assertTrue( repo.count() == 0 );
     }
+
+    public void testCreateAndAssignPermissionToRole() throws Exception, SQLException {
+        Connection c = fetchConnection();
+
+        EnumerationValue enum_role = new EnumerationValue( 1, "the_role", "Role", "role" );
+        EnumerationValue enum_permission = new EnumerationValue( 2, "the_perm", "Permission", "permission" );
+
+        EnumerationValueRepository repo = new EnumerationValueRepository(c);
+
+        UnitOfWork unit = new UnitOfWork(c);
+        unit.scheduleCreate(enum_role, repo)
+            .scheduleCreate(enum_permission, repo)
+            .store()
+            .commit();
+
+        // check if enums were created
+        assertTrue( repo.count() > 0 );
+
+        // check if IDs are different; the enums must be distinguishable
+        assertTrue( enum_role.id() != enum_permission.id() );
+
+        // assign permission to role...
+        Permission perm = new Permission( enum_role.id(), enum_permission.id() );
+        PermissionRepository perm_repo = new PermissionRepository(c);
+        // ...and store the mapping in database
+        unit.scheduleCreate(perm, perm_repo).store().commit();
+
+        // assert that at least one permission has been created
+        assertTrue( perm_repo.count() > 0 );
+
+        // this will make the test fail if the mapping has not been created
+        perm_repo.withId( perm.id() );
+    }
 }
