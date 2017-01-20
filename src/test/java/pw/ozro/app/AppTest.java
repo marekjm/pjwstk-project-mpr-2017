@@ -67,4 +67,13 @@ public class AppTest
         (new UnitOfWork(c)).scheduleCreate(entity, repo).store().commit();
         assertTrue( repo.count() > 0 );
     }
+
+    public void testClearUsers() throws SQLException {
+        Connection c = fetchConnection();
+
+        UserRepository repo = new UserRepository(c);
+        repo.clear();
+
+        assertTrue( repo.count() == 0 );
+    }
 }
