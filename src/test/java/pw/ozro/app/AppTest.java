@@ -116,4 +116,28 @@ public class AppTest
         // this will make the test fail if the mapping has not been created
         perm_repo.withId( perm.id() );
     }
+
+    public void testDeletingUsers() throws SQLException {
+        Connection c = fetchConnection();
+
+        User entity = new User( "JohnDoe", "p4$Sw0rD" );
+        UserRepository repo = new UserRepository(c);
+
+        UnitOfWork unit = (new UnitOfWork(c));
+        unit.scheduleCreate(entity, repo).store().commit();
+
+        assertTrue( repo.count() > 0 );
+
+        unit.scheduleDelete(entity, repo).store().commit();
+
+        try {
+            repo.withId( entity.id() );
+
+            // make sure the test fails if we can get deleted entity
+            assertTrue( false );
+        } catch (Exception e) {
+            // a NOOP assertion, to mark the test as passed
+            assertTrue( true );
+        }
+    }
 }
