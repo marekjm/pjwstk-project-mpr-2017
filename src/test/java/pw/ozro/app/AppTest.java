@@ -4,6 +4,11 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+
 /**
  * Unit test for simple App.
  */
@@ -34,5 +39,13 @@ public class AppTest
     public void testApp()
     {
         assertTrue( true );
+    }
+
+    public static Connection fetchConnection() throws SQLException {
+        return DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb", "SA", "");
+    }
+
+    public void testConnection() throws SQLException {
+        fetchConnection();
     }
 }
